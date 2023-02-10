@@ -7,9 +7,11 @@ import {
   SafeAreaView,
   FlatList,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {Product} from './src/components/product';
 import axios from 'axios';
+import {IProduct} from './src/types';
 
 const DATA = [
   {
@@ -32,18 +34,18 @@ function App(): JSX.Element {
 }
 
 function MainApp() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       fetchProducts();
-    }, 10000);
+    }, 1000);
   }, []);
 
   async function fetchProducts() {
     const res = await axios.get('https://dummyjson.com/products');
-    setProducts(res.data);
+    setProducts(res.data.products);
     setIsLoading(false);
   }
 
@@ -56,6 +58,7 @@ function MainApp() {
       </View>
     );
   }
+
   return (
     <SafeAreaView style={tailwind('mx-5')}>
       <View>
@@ -73,11 +76,11 @@ function MainApp() {
           Choose your style
         </Text>
       </View>
-      <View>
+      <View style={tailwind('')}>
         <FlatList
           numColumns={2}
-          data={DATA}
-          renderItem={({item}) => <Product />}
+          data={products}
+          renderItem={({item}) => <Product product={item} />}
           // keyExtractor={item => item.id}
         />
       </View>
