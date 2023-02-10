@@ -7,8 +7,8 @@ export function ProductScreen() {
   const tailwind = useTailwind();
   const routes = useRoute();
   return (
-    <SafeAreaView style={tailwind('flex-1')}>
-      <View style={tailwind('flex-1 rounded-lg')}>
+    <SafeAreaView style={tailwind('flex-1 mx-4')}>
+      <View style={tailwind('h-40 rounded-lg')}>
         <Image
           /* @ts-ignore */
           source={{uri: routes.params?.product.thumbnail}}

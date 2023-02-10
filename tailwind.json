@@ -41,6 +41,12 @@
 			"marginBottom": 24
 		}
 	},
+	"mx-4": {
+		"style": {
+			"marginLeft": 16,
+			"marginRight": 16
+		}
+	},
 	"mt-5": {
 		"style": {
 			"marginTop": 20
@@ -59,6 +65,11 @@
 	"h-72": {
 		"style": {
 			"height": 288
+		}
+	},
+	"h-40": {
+		"style": {
+			"height": 160
 		}
 	},
 	"w-2/4": {

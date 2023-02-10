@@ -32,6 +32,11 @@
   margin-bottom: 1.5rem
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem
+}
+
 .mt-5 {
   margin-top: 1.25rem
 }
@@ -46,6 +51,10 @@
 
 .h-72 {
   height: 18rem
+}
+
+.h-40 {
+  height: 10rem
 }
 
 .w-2\/4 {
