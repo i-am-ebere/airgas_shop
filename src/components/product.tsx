@@ -1,5 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, Image, LogBox} from 'react-native';
+import {View, Text, Image, LogBox, Pressable} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 import {IProduct} from '../types';
 
@@ -9,13 +10,17 @@ interface IProductProps {
 
 export function Product(props: IProductProps) {
   const tailwind = useTailwind();
-  console.log(props.product.thumbnail);
+  const navigation = useNavigation();
   return (
-    <View style={tailwind('rounded-lg flex-1 h-72')}>
+    <Pressable
+      style={tailwind('rounded-lg flex-1 h-72')}
+      onPress={() =>
+        navigation.navigate('ProductView', {product: props.product})
+      }>
       <Image
         source={{uri: props.product.thumbnail}}
         resizeMode={'cover'}
-        style={{flex: 1}}
+        style={tailwind('flex-1')}
       />
       <View style={tailwind('bg-white p-2 absolute bottom-2 right-0 w-36')}>
         <Text numberOfLines={1}>{props.product.title}</Text>
@@ -23,6 +28,6 @@ export function Product(props: IProductProps) {
           ${props.product.price}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 }

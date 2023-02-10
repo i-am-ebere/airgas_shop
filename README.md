@@ -14,3 +14,11 @@
 ```
     GET - https://dummyjson.com/products
 ```
+
+### Running app
+
+```
+npm install
+
+cd ios && pod install && cd ..
+```
