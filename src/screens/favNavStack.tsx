@@ -1,17 +1,17 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProductHomeScreen} from './screens/ProductHomeScreen';
-import {ProductScreen} from './screens/ProductScreen';
+import {ProductScreen} from './ProductScreen';
+import {FavHomeScreen} from './FavHomeScreen';
 
 const Stack = createNativeStackNavigator();
-export function NavStack() {
+export function FavNavStack() {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={'ProductHome'}>
-      <Stack.Screen name="ProductHome" component={ProductHomeScreen} />
+      initialRouteName={'FavHome'}>
+      <Stack.Screen name="FavHome" component={FavHomeScreen} />
       <Stack.Screen
         options={{
           headerShown: true,
