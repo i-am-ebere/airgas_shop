@@ -1,8 +1,15 @@
 import {TailwindProvider, useTailwind} from 'tailwind-rn';
 import utilities from './tailwind.json';
-import React from 'react';
-import {View, Text, SafeAreaView, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import {Product} from './src/components/product';
+import axios from 'axios';
 
 const DATA = [
   {
@@ -25,7 +32,30 @@ function App(): JSX.Element {
 }
 
 function MainApp() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchProducts();
+    }, 10000);
+  }, []);
+
+  async function fetchProducts() {
+    const res = await axios.get('https://dummyjson.com/products');
+    setProducts(res.data);
+    setIsLoading(false);
+  }
+
   const tailwind = useTailwind();
+
+  if (isLoading) {
+    return (
+      <View style={tailwind('flex-1 justify-center')}>
+        <ActivityIndicator color={'red'} size={'large'} />
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={tailwind('mx-5')}>
       <View>
