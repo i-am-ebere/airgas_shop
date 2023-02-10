@@ -10,7 +10,6 @@ import {IProduct} from '../types';
 interface CartItems {
   cartItems: IProduct[];
   addItemsToCart: (val: IProduct) => void;
-  //TODO: Create information needed
 }
 
 const CartItemContext = createContext<CartItems | undefined>(undefined);
@@ -20,15 +19,20 @@ export function useCartItems() {
   if (context === undefined) {
     throw new Error('Should ');
   }
-  return context; // my cart data
+  return context;
 }
 
 type ICartItemsProvider = PropsWithChildren<any>;
 
 export function CartItemsProvider(props: ICartItemsProvider) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<IProduct[]>([]);
+
+  function addItemsToCart(value: IProduct) {
+    setCartItems([...cartItems, value]);
+  }
   return (
-    <CartItemContext.Provider value={{cartItems, addItemsToCart: setCartItems}}>
+    <CartItemContext.Provider
+      value={{cartItems, addItemsToCart: addItemsToCart}}>
       {props.children}
     </CartItemContext.Provider>
   );
