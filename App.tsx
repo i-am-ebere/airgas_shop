@@ -49,7 +49,7 @@ function App(): JSX.Element {
             name="Cart"
             component={NavStack}
             options={{
-              tabBarBadge: 0,
+              tabBarBadge: 1,
               tabBarIcon: ({focused}) => (
                 <CartIcon
                   fill={focused ? 'red' : '#000'}
