@@ -14,9 +14,15 @@ export function Product(props: IProductProps) {
   return (
     <Pressable
       style={tailwind('rounded-lg flex-1 h-72')}
-      onPress={() =>
-        navigation.navigate('ProductView', {product: props.product})
-      }>
+      onPress={() => {
+        navigation.navigate('ProductWaitingView', {
+          screen: 'ProductView',
+          params: {
+            product: props.product,
+          },
+        });
+        // navigation.navigate('ProductView', {product: props.product})
+      }}>
       <Image
         source={{uri: props.product.thumbnail}}
         resizeMode={'cover'}

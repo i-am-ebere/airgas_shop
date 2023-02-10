@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, Image, View, Text} from 'react-native';
+import {SafeAreaView, Image, View, Text, Platform} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 export function ProductScreen() {
