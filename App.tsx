@@ -11,6 +11,8 @@ import CartIcon from './src/assets/cart-icon.svg';
 import SearchIcon from './src/assets/search-icon.svg';
 import {FavNavStack} from './src/screens/favNavStack';
 
+import {CartItemsProvider, useCartItems} from './src/services/use-cart-service';
+
 const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
@@ -18,63 +20,60 @@ function App(): JSX.Element {
     /* @ts-ignore-next-line */
     <TailwindProvider utilities={utilities}>
       <NavigationContainer>
-        <Tab.Navigator screenOptions={{headerShown: false}}>
-          <Tab.Screen
-            name="Home"
-            component={NavStack}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <HomeIcon
-                  fill={focused ? 'red' : '#000'}
-                  width={20}
-                  height={20}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Favourites"
-            component={FavNavStack}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <FavIcon
-                  fill={focused ? 'red' : '#000'}
-                  width={20}
-                  height={20}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Cart"
-            component={NavStack}
-            options={{
-              tabBarBadge: 1,
-              tabBarIcon: ({focused}) => (
-                <CartIcon
-                  fill={focused ? 'red' : '#000'}
-                  width={20}
-                  height={20}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Search"
-            component={NavStack}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <SearchIcon
-                  fill={focused ? 'red' : '#000'}
-                  width={20}
-                  height={20}
-                />
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        <CartItemsProvider>
+          <MainApp />
+        </CartItemsProvider>
       </NavigationContainer>
     </TailwindProvider>
+  );
+}
+
+function MainApp() {
+  const cartHook = useCartItems();
+  return (
+    <Tab.Navigator screenOptions={{headerShown: false}}>
+      <Tab.Screen
+        name="Home"
+        component={NavStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <HomeIcon fill={focused ? 'red' : '#000'} width={20} height={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favourites"
+        component={FavNavStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FavIcon fill={focused ? 'red' : '#000'} width={20} height={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={NavStack}
+        options={{
+          tabBarBadge: cartHook.cartItems.length,
+          tabBarIcon: ({focused}) => (
+            <CartIcon fill={focused ? 'red' : '#000'} width={20} height={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={NavStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <SearchIcon
+              fill={focused ? 'red' : '#000'}
+              width={20}
+              height={20}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 

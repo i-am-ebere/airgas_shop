@@ -5,10 +5,12 @@ import {View, ActivityIndicator, Text, FlatList} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 import {Product} from '../components/product';
 import {IProduct} from '../types';
+import {useCartItems} from '../services/use-cart-service';
 
 export function ProductHomeScreen() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const addCartItemHook = useCartItems();
 
   useEffect(() => {
     setTimeout(() => {
